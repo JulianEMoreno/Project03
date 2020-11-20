@@ -7,19 +7,12 @@ using UnityEngine.AI;
 public class EnemyAi : MonoBehaviour
 { 
    public NavMeshAgent agent;
-
-
-
-public LayerMask whatIsGround, whatIsPlayer;
-
-//public float health;
+   public LayerMask whatIsGround, whatIsPlayer;
 
 //Patroling
 public Vector3 walkPoint;
 bool walkPointSet;
 public float walkPointRange;
-
-
 
 //States
 public float sightRange, attackRange;
@@ -27,18 +20,12 @@ public bool playerInSightRange, playerInAttackRange;
 
 private void Awake()
 {
-   // player = GameObject.Find("PlayerObj").transform;
     agent = GetComponent<NavMeshAgent>();
 }
-
 private void Update()
 {
-
-
     if (!playerInSightRange && !playerInAttackRange) Patroling();
-
 }
-
 private void Patroling()
 {
     if (!walkPointSet) SearchWalkPoint();
@@ -63,10 +50,6 @@ private void SearchWalkPoint()
     if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
         walkPointSet = true;
 }
-
-
-
-
 private void OnDrawGizmosSelected()
 {
     Gizmos.color = Color.red;

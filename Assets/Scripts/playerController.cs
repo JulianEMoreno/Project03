@@ -8,46 +8,39 @@ public class playerController : MonoBehaviour
 {
     public CharacterController controller;
     public Transform cam;
-    public float speed = 6f;
-    public  GameObject processing;
-   public bool listenMode;
-    public Slider slider;
 
-    public GameObject Obj1;
-    public GameObject Obj2;
-    public float Distance;
-    public GUIStyle style;
     [SerializeField] GameObject zombieParticle;
 
-   // GameObject varGameObject = GameObject.FindWithTag("Enemy");
+    public GameObject player;
+    public GameObject zombie;
+    public GameObject processing;
+    public Slider slider;
+
+    public float speed = 6f;
+    public float Distance;
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
-    // Start is called before the first frame update
-    void Start()
-    {
-        style.fontSize = 50;
-    }
 
-    // Update is called once per frame
+
+
     void Update()
     {
-
-
-        Distance = Vector3.Distance(Obj1.transform.position, Obj2.transform.position);
-       // bool listenPressed = Input.GetButton("l");
-       // bool listenUnpressed = Input.GetButton(KeyCode.L);
-
-        if ( Input.GetKey("l" ) )
+        if(Input.GetKeyDown("escape"))
         {
-         
-          // GameObject.FindWithTag("Enemy").GetComponent<Outline>().enabled = true;
+            Debug.Log("Exit Application");
+            Application.Quit();
+        }
+        Distance = Vector3.Distance(player.transform.position, zombie.transform.position);
+
+        if ( Input.GetKey("left shift" ) && Input.GetKey("space") )
+        {
+        
          slider.value -= 1f;
-            listenMode = true;
           processing.SetActive(true);
             if(Distance <13)
             {
                 zombieParticle.SetActive(true);
-              //  particleSystem.playOnAwake;
+
                 GameObject.FindWithTag("Enemy").GetComponent<Outline>().enabled = true;
             }
             if(Distance >13)
@@ -61,7 +54,6 @@ public class playerController : MonoBehaviour
             zombieParticle.SetActive(false);
             GameObject.FindWithTag("Enemy").GetComponent<Outline>().enabled = false;
             slider.value += 2f;
-            listenMode = false;
            processing.SetActive(false);
         }
         
@@ -69,7 +61,6 @@ public class playerController : MonoBehaviour
         {
             zombieParticle.SetActive(false);
             GameObject.FindWithTag("Enemy").GetComponent<Outline>().enabled = false;
-            listenMode = false;
           processing.SetActive(false);
         }
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -90,8 +81,4 @@ public class playerController : MonoBehaviour
         
     }
 
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(50, 150, 200, 200), "Value :" + Distance, style);
-    }
 }

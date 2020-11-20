@@ -15,12 +15,9 @@ public class animationScript : MonoBehaviour
     int isWalkingHash;
     int isRunningHash;
     int isCrouchingHash;
-  //  float velocity = 0.0f;
 
-   // public float acceleration = 0.1f;
-  //  public float decceleration = 0.1f;
     int VelocityHash; 
-    // Start is called before the first frame update
+
     void Start()
     {
         VelocityHash = Animator.StringToHash("Velocity");
@@ -36,7 +33,7 @@ public class animationScript : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+
     void Update()
     {
        
